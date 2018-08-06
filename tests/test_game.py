@@ -9,6 +9,6 @@ class TestApi(unittest.TestCase):
     def setUpClass(cls):
         True
 
-    # @mock.patch('app.main')
+    # @mock.patch('icb.main')
     def test_game(self):
         self.assertTrue(True)
