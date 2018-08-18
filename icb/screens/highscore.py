@@ -1,13 +1,13 @@
 import json
 
-from icb.screens.page import Page, Item
+from icb.screens.page import Page, MenuItem
 from icb.utils.colors import Colors
 
 
 class Highscores(Page):
 
-    def __init__(self, screen, score_file="highscore.json"):
-        Page.__init__(self, screen, title="Highscores")
+    def __init__(self, screen, machine, score_file="highscore.json"):
+        Page.__init__(self, screen, machine=machine, title="Highscores")
         self.spacing = 30
         self.highscore_file = score_file
         self.highscores = self.load()
@@ -33,9 +33,9 @@ class Highscores(Page):
         s = sorted(self.highscores, key=lambda k: k["score"], reverse=True)
         highscores = []
         for index, score in enumerate(s):
-            highscores.append(Item(self.screen,
-                                   text="{0:2d}.{1:>5s}: {2:>20d}".format(index+1, score['name'], score['score']),
-                                   item_xpos=10, item_ypos=current_height))
+            highscores.append(MenuItem(self.screen,
+                                       text="{0:2d}.{1:>5s}: {2:>20d}".format(index+1, score['name'], score['score']),
+                                       item_xpos=10, item_ypos=current_height))
             highscores[index].draw()
 
             current_height = current_height+self.spacing

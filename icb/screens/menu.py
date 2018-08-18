@@ -1,33 +1,41 @@
-import pygame
-from icb.screens.page import Page, Item
+from pygame.time import get_ticks
+
 from icb.hardware.state import State
+from icb.screens.page import Page
+
 
 class Menu(Page):
-    def __init__(self, screen):
-        Page.__init__(self, screen, title='Menu')
-        self.menu_items = [Item(screen, text="Play", item_xpos=10, item_ypos=30, selected=True),
-                           Item(screen, text="Highscores", item_xpos=10, item_ypos=55),
-                           Item(screen, text="Diagnostics", item_xpos=10, item_ypos=80)
-                           ]
+    def __init__(self, screen, machine):
+        Page.__init__(self, screen, machine=machine, title='Menu')
+        self.add_menu_item(text="Play", machine_state=State.PLAYING)
+        self.add_menu_item(text="Highscores", machine_state=State.HIGH_SCORE)
+        self.add_menu_item(text="Diagnostics", machine_state=State.DIAGNOSTIC)
+
+
+        self.menu_items[self.selected].selected = True
+
+        self.time_ms_between_menu_change = 100
+        self.last_press = get_ticks()
 
     def draw(self):
         Page.draw(self)
+
         for item in self.menu_items:
             item.draw()
 
+    def event_handler(self, escape, machine):
+        escape, machine = Page.event_handler(escape, machine)
+        if get_ticks() > self.last_press+self.time_ms_between_menu_change:
+            if self.machine.inputs["start"].state == "high":
+                machine.state = self.menu_items[self.selected].machine_state
+            elif self.machine.inputs["right_down"].state == "high" \
+                    or self.machine.inputs["left_down"].state == "high":
+                self.menu_down()
 
-    # @staticmethod
-    # def event_handler(escape, machine):
-    #     for event in pygame.event.get():  # User did something
-    #         if event.type == pygame.QUIT:  # If user clicked close
-    #             escape = True  # Flag that we are done so we exit this loop
-    #         elif event.type == pygame.KEYDOWN:
-    #             if event.key == pygame.K_ESCAPE:
-    #                 escape = True
-    #             else:
-    #                 for inp in machine.inputs:
-    #                     if inp.key == event.key:
-    #                         inp.state = "high"
-    #
-    #
-    #     return escape, machine
+            elif self.machine.inputs["right_up"].state == "high" \
+                    or self.machine.inputs["left_up"].state == "high":
+                self.menu_up()
+
+            self.last_press = get_ticks()
+
+        return escape, machine

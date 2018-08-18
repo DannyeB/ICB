@@ -11,7 +11,7 @@ class Game:
                      ]
 
     def start(self, machine):
-        machine.state = State.RUNNING
+        machine.state = State.PLAYING
         self.current_run = self.runs[0]
 
 

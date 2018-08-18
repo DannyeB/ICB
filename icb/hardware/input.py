@@ -1,6 +1,5 @@
 class Input:
-    def __init__(self, name, state, row, column, key):
-        self.name = name
+    def __init__(self, state, row, column, key):
         self.state = state
         self.row = row
         self.column = column

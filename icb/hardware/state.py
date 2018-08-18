@@ -3,7 +3,8 @@ from enum import Enum, auto
 
 class State(Enum):
     DIAGNOSTIC = auto()
-    IDLE = auto()
-    RUNNING = auto()
+    ATTRACT = auto()
+    PLAYING = auto()
+    PAUSED = auto()
     MENU = auto()
-    HIGHSCORE = auto()
+    HIGH_SCORE = auto()
