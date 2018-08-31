@@ -11,7 +11,7 @@ class Game(Page):
         self.level = 0
         self.game = G()
         self.add_menu_item("Level:", xpos=30, ypos=50)
-        self.add_menu_item(self.game.current_run.name, xpos=100, ypos=50, font_color=Colors.GREEN)
+        self.add_menu_item(self.game.current_level.name, xpos=100, ypos=50, font_color=Colors.GREEN)
         self.add_menu_item("Time:", xpos=30)
         self.add_menu_item("", xpos=100, ypos=self.menu_items[len(self.menu_items)-1].item_ypos, font_color=Colors.GREEN)
         self.add_menu_item("Target:", xpos=30)
@@ -19,7 +19,7 @@ class Game(Page):
         self.add_menu_item("Bonus:", xpos=30)
         self.add_menu_item("0", xpos=100, ypos=self.menu_items[len(self.menu_items)-1].item_ypos, font_color=Colors.RED)
         self.add_menu_item("Balls:", xpos=30)
-        self.add_menu_item(str(self.game.current_run.balls), xpos=100, ypos=self.menu_items[len(self.menu_items)-1].item_ypos,
+        self.add_menu_item(str(self.game.current_level.balls), xpos=100, ypos=self.menu_items[len(self.menu_items) - 1].item_ypos,
                            font_color=Colors.BLUE)
         self.add_menu_item("Score:", xpos=30)
         self.add_menu_item("0", xpos=100, ypos=self.menu_items[len(self.menu_items)-1].item_ypos,
@@ -30,7 +30,7 @@ class Game(Page):
 
         if self.game.state == State.PLAYING:
             self.game.update_game_loop()
-            self.menu_items[1].text = self.game.current_run.name
+            self.menu_items[1].text = self.game.current_level.name
         elif self.game.state == State.HOMING:
             self.game.update_home_loop()
             self.menu_items[1].text = "HOMING..."
@@ -41,8 +41,8 @@ class Game(Page):
             self.menu_items[1].text = "GAME OVER"
 
         self.menu_items[3].text = str(self.game.time_seconds)
-        self.menu_items[5].text = str(self.game.current_run.target)
-        self.menu_items[7].text = str(self.game.current_run.bonus)
+        self.menu_items[5].text = str(self.game.current_level.target)
+        self.menu_items[7].text = str(self.game.current_level.bonus)
         self.menu_items[9].text = str(self.game.balls)
         self.menu_items[11].text = str(self.game.score)
 
@@ -63,7 +63,7 @@ class Game(Page):
             self.game.right_home = False
 
         if self.game.state == State.PLAYING:
-            if machine.inputs[self.game.current_run.target].state == "high":
+            if machine.inputs[self.game.current_level.target].state == "high":
                 self.game.state = State.STAGE_COMPLETE
 
             if machine.inputs["lost_ball"].state == "high":

@@ -6,16 +6,13 @@ from pygame.time import get_ticks
 class Game:
     def __init__(self, difficulty=Difficulty.EASY):
 
-        self.runs = [Level(name="Level 1", target="goal_1", time_limit=120, target_time=30, difficulty=difficulty),
-                     Level(name="Level 2", target="goal_2", time_limit=120, target_time=60, difficulty=difficulty),
-                     Level(name="Level 3", target="goal_3", time_limit=120, target_time=120, difficulty=difficulty)
-                     ]
+        self.levels = Level.load_levels(difficulty=difficulty)
 
-        self.current_level = 0
-        self.current_run = self.runs[self.current_level]
+        self.current_level_number = 0
+        self.current_level = self.levels[self.current_level_number]
         self.left_home = False
         self.right_home = False
-        self.balls = self.current_run.balls
+        self.balls = self.current_level.balls
         self.score = 0
         self.state = State.HOMING
         self.start_time = get_ticks()
@@ -23,23 +20,23 @@ class Game:
 
     def update_game_loop(self):
         self.time_seconds = int((get_ticks() - self.start_time)/1000)
-        if self.current_run.bonus > 0:
-            self.current_run.bonus = self.current_run.bonus-self.current_run.difficulty.value
+        if self.current_level.bonus > 0:
+            self.current_level.bonus = self.current_level.bonus - self.current_level.difficulty.value
 
         else:
-            self.current_run.bonus = 0
+            self.current_level.bonus = 0
 
         if self.balls <= 0:
             self.state = State.GAME_OVER
 
     def next_level(self):
-        self.score += self.current_run.bonus
-        self.score += self.balls * self.current_run.difficulty.value
-        self.current_level = self.current_level+1
-        if self.current_level < len(self.runs):
+        self.score += self.current_level.bonus
+        self.score += self.balls * self.current_level.difficulty.value
+        self.current_level_number = self.current_level_number+1
+        if self.current_level_number < len(self.levels):
             print("Next Level!")
             self.state = State.HOMING
-            self.current_run = self.runs[self.current_level]
+            self.current_level = self.levels[self.current_level_number]
             self.start_time = get_ticks()
             self.time_seconds = 0
         else:
