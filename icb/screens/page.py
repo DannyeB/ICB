@@ -31,7 +31,7 @@ class Page:
         textsurface = self.font.render(self.title, True, self.font_color)
         self.screen.blit(textsurface, (self.title_xpos, self.title_ypos))
 
-    def add_menu_item(self, text, machine_state, xpos=None, ypos=None, y_increment=None, font_color=Colors.BLACK,
+    def add_menu_item(self, text, machine_state=None, xpos=None, ypos=None, y_increment=None, font_color=Colors.BLACK,
                       font_size=30, font='arial', selected=False):
         if xpos is None:
             xpos = self.defaut_item_x

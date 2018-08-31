@@ -14,6 +14,8 @@ class Machine:
                        "left_up": Input(state="low", row=0, column=1, key=pygame.K_s),
                        "right_down": Input(state="low", row=0, column=2, key=pygame.K_d),
                        "right_up": Input(state="low", row=0, column=3, key=pygame.K_f),
+                       "left_home": Input(state="low", row=0, column=4, key=pygame.K_g),
+                       "right_home": Input(state="low", row=0, column=5, key=pygame.K_h),
                        "start": Input(state="low", row=1, column=0, key=pygame.K_q),
                        "select": Input(state="low", row=1, column=1, key=pygame.K_w),
                        "mode_select": Input(state="low", row=1, column=2, key=pygame.K_m),
