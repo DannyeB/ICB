@@ -11,7 +11,6 @@ Game based on Ice Cold Beer
   '{{repeat(5, 7)}}',
   {
     name : "Level {{index()+1}}",
-    balls : 5,
     target : "goal_{{index()+1}}",
     time_limit : '{{(index()+1) * 60 * 2}}',
     target_time : '{{(index()+1) * 60}}'

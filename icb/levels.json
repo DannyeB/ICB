@@ -1,49 +1,42 @@
 [
   {
     "name": "Level 1",
-    "balls": 5,
     "target": "goal_1",
     "time_limit": 120,
     "target_time": 60
   },
   {
     "name": "Level 2",
-    "balls": 5,
     "target": "goal_2",
     "time_limit": 240,
     "target_time": 120
   },
   {
     "name": "Level 3",
-    "balls": 5,
     "target": "goal_3",
     "time_limit": 360,
     "target_time": 180
   },
   {
     "name": "Level 4",
-    "balls": 5,
     "target": "goal_4",
     "time_limit": 480,
     "target_time": 240
   },
   {
     "name": "Level 5",
-    "balls": 5,
     "target": "goal_5",
     "time_limit": 600,
     "target_time": 300
   },
   {
     "name": "Level 6",
-    "balls": 5,
     "target": "goal_6",
     "time_limit": 720,
     "target_time": 360
   },
   {
     "name": "Level 7",
-    "balls": 5,
     "target": "goal_7",
     "time_limit": 840,
     "target_time": 420

@@ -13,13 +13,13 @@ class Highscores(Page):
         self.highscores = self.load()
 
     def save(self):
-        print("Saving Highscores...")
+        print("Saving Highscores to %s" % self.highscore_file)
 
         with open(self.highscore_file, 'w') as outfile:
             json.dump(self.highscores, outfile, indent=4, sort_keys=True)
 
     def load(self):
-        print("Loading Highscores")
+        print("Loading Highscores from %s" % self.highscore_file)
         with open(self.highscore_file) as file:
             return json.load(file)
 

@@ -4,7 +4,7 @@ from icb.game.difficulty import Difficulty
 from pygame.time import get_ticks
 
 class Game:
-    def __init__(self, difficulty=Difficulty.EASY):
+    def __init__(self, difficulty=Difficulty.EASY, balls=5):
 
         self.levels = Level.load_levels(difficulty=difficulty)
 
@@ -12,7 +12,7 @@ class Game:
         self.current_level = self.levels[self.current_level_number]
         self.left_home = False
         self.right_home = False
-        self.balls = self.current_level.balls
+        self.balls = balls
         self.score = 0
         self.state = State.HOMING
         self.start_time = get_ticks()

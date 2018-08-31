@@ -19,7 +19,7 @@ class Game(Page):
         self.add_menu_item("Bonus:", xpos=30)
         self.add_menu_item("0", xpos=100, ypos=self.menu_items[len(self.menu_items)-1].item_ypos, font_color=Colors.RED)
         self.add_menu_item("Balls:", xpos=30)
-        self.add_menu_item(str(self.game.current_level.balls), xpos=100, ypos=self.menu_items[len(self.menu_items) - 1].item_ypos,
+        self.add_menu_item(str(self.game.balls), xpos=100, ypos=self.menu_items[len(self.menu_items) - 1].item_ypos,
                            font_color=Colors.BLUE)
         self.add_menu_item("Score:", xpos=30)
         self.add_menu_item("0", xpos=100, ypos=self.menu_items[len(self.menu_items)-1].item_ypos,
