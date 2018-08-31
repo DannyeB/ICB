@@ -1,4 +1,4 @@
-from icb.game.run import Run
+from icb.game.level import Level
 from icb.hardware.state import State
 from icb.game.difficulty import Difficulty
 from pygame.time import get_ticks
@@ -6,9 +6,9 @@ from pygame.time import get_ticks
 class Game:
     def __init__(self, difficulty=Difficulty.EASY):
 
-        self.runs = [Run(name="Level 1", target="goal_1", time_limit=120, target_time=30, difficulty=difficulty),
-                     Run(name="Level 2", target="goal_2", time_limit=120, target_time=60, difficulty=difficulty),
-                     Run(name="Level 3", target="goal_3", time_limit=120, target_time=120, difficulty=difficulty)
+        self.runs = [Level(name="Level 1", target="goal_1", time_limit=120, target_time=30, difficulty=difficulty),
+                     Level(name="Level 2", target="goal_2", time_limit=120, target_time=60, difficulty=difficulty),
+                     Level(name="Level 3", target="goal_3", time_limit=120, target_time=120, difficulty=difficulty)
                      ]
 
         self.current_level = 0

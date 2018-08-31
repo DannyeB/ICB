@@ -1,7 +1,7 @@
 from icb.game.difficulty import Difficulty
 
 
-class Run:
+class Level:
     def __init__(self, name, target, time_limit, target_time, balls=5, bonus_multiplier=100, difficulty=Difficulty.EASY):
         self.difficulty = difficulty
         self.name = name
