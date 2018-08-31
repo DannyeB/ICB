@@ -22,7 +22,13 @@ class Machine:
                        "goal_1": Input(state="low", row=2, column=0, key=pygame.K_1),
                        "goal_2": Input(state="low", row=2, column=1, key=pygame.K_2),
                        "goal_3": Input(state="low", row=2, column=2, key=pygame.K_3),
-                       "lost_ball": Input(state="low", row=2, column=2, key=pygame.K_4),
-                       "ball_1": Input(state="low", row=3, column=0, key=pygame.K_z),
-                       "ball_2": Input(state="low", row=3, column=1, key=pygame.K_x),
-                       "ball_3": Input(state="low", row=3, column=2, key=pygame.K_c)}
+                       "goal_4": Input(state="low", row=2, column=3, key=pygame.K_4),
+                       "goal_5": Input(state="low", row=2, column=4, key=pygame.K_5),
+                       "goal_6": Input(state="low", row=2, column=5, key=pygame.K_6),
+                       "goal_7": Input(state="low", row=3, column=0, key=pygame.K_7),
+                       "goal_8": Input(state="low", row=3, column=1, key=pygame.K_8),
+                       "goal_9": Input(state="low", row=3, column=2, key=pygame.K_9),
+                       "lost_ball": Input(state="low", row=3, column=3, key=pygame.K_0),
+                       "ball_1": Input(state="low", row=4, column=0, key=pygame.K_z),
+                       "ball_2": Input(state="low", row=4, column=1, key=pygame.K_x),
+                       "ball_3": Input(state="low", row=4, column=2, key=pygame.K_c)}
