@@ -1,10 +1,12 @@
 import pygame
 
-from icb.screens.highscore import Highscores
+
 from icb.hardware.machine import Machine
 from icb.hardware.state import State
+from icb.screens.highscore import Highscores
 from icb.screens.diagnostics import Diagnostics
 from icb.screens.menu import Menu
+from icb.screens.game import Game
 
 machine = Machine()
 pygame.init()
@@ -21,6 +23,7 @@ diagnostics = Diagnostics(screen=screen, machine=machine,
                           rows=machine.rows, columns=machine.columns, width=35, height=35, margin=3)
 menu = Menu(screen=screen, machine=machine)
 highscore = Highscores(screen=screen, machine=machine)
+game = Game(screen=screen, machine=machine)
 # Loop until the user clicks the close button.
 done = False
 
@@ -40,6 +43,9 @@ if __name__ == '__main__':
         elif machine.state == State.HIGH_SCORE:
             done, machine = highscore.event_handler(done, machine)
             highscore.draw()
+        elif machine.state == State.PLAYING:
+            done, machine = game.event_handler(done, machine)
+            game.draw()
         else:
             machine.state = State.MENU
 
