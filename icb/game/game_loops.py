@@ -7,11 +7,15 @@ class Game:
     def __init__(self, difficulty=Difficulty.EASY, balls=5):
 
         self.levels = Level.load_levels(difficulty=difficulty)
-
         self.current_level_number = 0
         self.current_level = self.levels[self.current_level_number]
         self.left_home = False
         self.right_home = False
+        self.left_pos = 0
+        self.right_pos = 0
+        self.left_max = 400
+        self.right_max = 400
+        self.move_distance = 5
         self.balls = balls
         self.score = 0
         self.state = State.HOMING

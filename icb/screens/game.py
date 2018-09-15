@@ -1,4 +1,5 @@
 from pygame.time import get_ticks
+from pygame import draw
 from icb.hardware.state import State
 from icb.screens.page import Page
 from icb.game.game_loops import Game as G
@@ -45,22 +46,29 @@ class Game(Page):
         self.menu_items[7].text = str(self.game.current_level.bonus)
         self.menu_items[9].text = str(self.game.balls)
         self.menu_items[11].text = str(self.game.score)
-
+        w, h = self.screen.get_size()
+        draw.rect(self.screen, (0, 128, 0), [10, h-self.game.left_pos-20, 10, 20], 10)
+        draw.rect(self.screen, (0, 128, 0), [w-20, h-self.game.right_pos-20, 10, 20], 10)
+        draw.lines(self.screen, (255, 0, 255), False, [(15, h-self.game.left_pos-10),
+                                                       (w-15, h-self.game.right_pos-10)], 1)
         for item in self.menu_items:
             item.draw()
 
     def event_handler(self, escape, machine):
         escape, machine = Page.event_handler(escape, machine)
 
-        if machine.inputs["left_home"].state == "high":
-            self.game.left_home = True
-        else:
-            self.game.left_home = False
+        if self.game.state == State.HOMING:
+            if machine.inputs["left_home"].state == "high":
+                self.game.left_home = True
+                self.game.left_pos = 0
+            else:
+                self.game.left_home = False
 
-        if machine.inputs["right_home"].state == "high":
-            self.game.right_home = True
-        else:
-            self.game.right_home = False
+            if machine.inputs["right_home"].state == "high":
+                self.game.right_home = True
+                self.game.right_pos = 0
+            else:
+                self.game.right_home = False
 
         if self.game.state == State.PLAYING:
             if machine.inputs[self.game.current_level.target].state == "high":
@@ -69,5 +77,13 @@ class Game(Page):
             if machine.inputs["lost_ball"].state == "high":
                 self.game.balls = self.game.balls - 1
                 self.game.state = State.HOMING
+            if machine.inputs["left_up"].state == "high" and self.game.left_pos <= self.game.left_max:
+                self.game.left_pos += self.game.move_distance
+            elif machine.inputs["left_down"].state == "high" and self.game.left_pos >= self.game.move_distance:
+                self.game.left_pos -= self.game.move_distance
+            if machine.inputs["right_up"].state == "high" and self.game.right_pos <= self.game.right_max:
+                self.game.right_pos += self.game.move_distance
+            elif machine.inputs["right_down"].state == "high" and  self.game.right_pos >= self.game.move_distance:
+                self.game.right_pos -= self.game.move_distance
 
         return escape, machine
