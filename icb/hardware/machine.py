@@ -32,3 +32,4 @@ class Machine:
                        "ball_1": Input(state="low", row=4, column=0, key=pygame.K_z),
                        "ball_2": Input(state="low", row=4, column=1, key=pygame.K_x),
                        "ball_3": Input(state="low", row=4, column=2, key=pygame.K_c)}
+        self.newgame = True

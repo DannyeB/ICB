@@ -3,6 +3,7 @@ from icb.hardware.state import State
 from icb.game.difficulty import Difficulty
 from pygame.time import get_ticks
 
+
 class Game:
     def __init__(self, difficulty=Difficulty.EASY, balls=5):
 

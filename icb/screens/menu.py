@@ -27,6 +27,8 @@ class Menu(Page):
         escape, machine = Page.event_handler(escape, machine)
         if get_ticks() > self.last_press+self.time_ms_between_menu_change:
             if self.machine.inputs["start"].state == "high":
+                if self.menu_items[self.selected].machine_state == State.PLAYING:
+                    machine.newgame = True
                 machine.state = self.menu_items[self.selected].machine_state
             elif self.machine.inputs["right_down"].state == "high" \
                     or self.machine.inputs["left_down"].state == "high":

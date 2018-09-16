@@ -10,6 +10,8 @@ class Game(Page):
     def __init__(self, screen, machine):
         Page.__init__(self, screen, machine=machine, title='ICB')
         self.level = 0
+        self.game_over_timeout = 10
+        self.game_over_time = 0
         self.game = G()
         self.add_menu_item("Level:", xpos=30, ypos=50)
         self.add_menu_item(self.game.current_level.name, xpos=100, ypos=50, font_color=Colors.GREEN)
@@ -40,6 +42,13 @@ class Game(Page):
             self.game.next_level()
         elif self.game.state == State.GAME_OVER:
             self.menu_items[1].text = "GAME OVER"
+
+            if self.game_over_time == 0:
+                self.game_over_time = get_ticks()
+            else:
+                time_seconds = int((get_ticks() - self.game_over_time) / 1000)
+                if time_seconds >= self.game_over_timeout:
+                    self.machine.state = State.MENU
 
         self.menu_items[3].text = str(self.game.time_seconds)
         self.menu_items[5].text = str(self.game.current_level.target)

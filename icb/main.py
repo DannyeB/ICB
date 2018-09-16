@@ -23,7 +23,6 @@ diagnostics = Diagnostics(screen=screen, machine=machine,
                           rows=machine.rows, columns=machine.columns, width=35, height=35, margin=3)
 menu = Menu(screen=screen, machine=machine)
 highscore = Highscores(screen=screen, machine=machine)
-game = Game(screen=screen, machine=machine)
 # Loop until the user clicks the close button.
 done = False
 
@@ -44,6 +43,9 @@ if __name__ == '__main__':
             done, machine = highscore.event_handler(done, machine)
             highscore.draw()
         elif machine.state == State.PLAYING:
+            if machine.newgame:
+                game = Game(screen=screen, machine=machine)
+                machine.newgame = False
             done, machine = game.event_handler(done, machine)
             game.draw()
         else:
