@@ -28,7 +28,7 @@ done = False
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
-
+game = Game(screen=screen, machine=machine)
 
 if __name__ == '__main__':
     # -------- Main Program Loop -----------
